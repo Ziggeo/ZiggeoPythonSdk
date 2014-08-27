@@ -1,0 +1,20 @@
+class ZiggeoVideos:
+
+    def __init__(self, application):
+        self.__application = application
+
+    def index(self, data = None):
+        return self.__application.connect.getJSON('/videos/', data)
+
+    def get(self, token_or_key):
+        return self.__application.connect.getJSON('/videos/' + token_or_key + '')
+
+    def update(self, token_or_key, data = None):
+        return self.__application.connect.postJSON('/videos/' + token_or_key + '', data)
+
+    def delete(self, token_or_key):
+        return self.__application.connect.delete('/videos/' + token_or_key + '')
+
+    def create(self, data = None, file = None):
+        return self.__application.connect.postJSON('/videos/', data, file)
+
