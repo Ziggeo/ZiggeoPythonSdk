@@ -9,6 +9,12 @@ class ZiggeoVideos:
     def get(self, token_or_key):
         return self.__application.connect.getJSON('/videos/' + token_or_key + '')
 
+    def download_video(self, token_or_key):
+        return self.__application.connect.get('/videos/' + token_or_key + '/video')
+
+    def download_image(self, token_or_key):
+        return self.__application.connect.get('/videos/' + token_or_key + '/image')
+
     def update(self, token_or_key, data = None):
         return self.__application.connect.postJSON('/videos/' + token_or_key + '', data)
 
