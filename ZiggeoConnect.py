@@ -7,8 +7,9 @@ class ZiggeoConnect:
         self.__application = application
         
     def request(self, method, path, data = None, file = None):
+        path = path.encode("ascii", "ignore")
         if (method == "GET" and data != None):
-            path = path + "?" + urllib.urlencode(data)
+            path = path + "?" + urllib.urlencode(data)        
         request = urllib2.Request(self.__application.config.server_api_url + "/v1" + path)
         base64string = base64.encodestring('%s:%s' % (self.__application.token, self.__application.private_key)).replace('\n', '')
         request.add_header("Authorization", "Basic %s" % base64string)

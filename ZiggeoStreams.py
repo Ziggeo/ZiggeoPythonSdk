@@ -21,3 +21,12 @@ class ZiggeoStreams:
     def create(self, video_token_or_key, data = None, file = None):
         return self.__application.connect.postJSON('/videos/' + video_token_or_key + '/streams', data, file)
 
+    def attach_image(self, video_token_or_key, token_or_key, data = None, file = None):
+        return self.__application.connect.postJSON('/videos/' + video_token_or_key + '/streams/' + token_or_key + '/image', data, file)
+
+    def attach_video(self, video_token_or_key, token_or_key, data = None, file = None):
+        return self.__application.connect.postJSON('/videos/' + video_token_or_key + '/streams/' + token_or_key + '/video', data, file)
+
+    def bind(self, video_token_or_key, token_or_key):
+        return self.__application.connect.postJSON('/videos/' + video_token_or_key + '/streams/' + token_or_key + '/bind')
+
