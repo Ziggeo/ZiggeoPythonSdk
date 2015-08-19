@@ -1,13 +1,10 @@
-import urllib, urllib2, base64, json, ntpath, requests
+import urllib, urllib2, base64, json, ntpath
 
 from MultiPartForm import MultiPartForm 
 
 class ZiggeoConnect:
     def __init__(self, application):
         self.__application = application
-
-    def requestWithRequests(self, method, path, data = None, file = None):
-        requests.get("https://srvapi.ziggeo.com/v1"+path+"?_method="+method, auth=(self.__application.token, self.__application.private_key))
         
     def request(self, method, path, data = None, file = None):
         path = path.encode("ascii", "ignore")
