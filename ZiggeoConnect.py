@@ -10,6 +10,8 @@ class ZiggeoConnect:
         path = path.encode("ascii", "ignore")
         if (method == "GET" and data != None):
             path = path + "?" + urllib.urlencode(data)        
+        if (method != "GET" and method != "POST"):
+            path = path + "?_method=" + method
         request = urllib2.Request(self.__application.config.server_api_url + "/v1" + path)
         base64string = base64.encodestring('%s:%s' % (self.__application.token, self.__application.private_key)).replace('\n', '')
         request.add_header("Authorization", "Basic %s" % base64string)
@@ -18,8 +20,6 @@ class ZiggeoConnect:
         else:
             if (data == None):
                 data = {}
-            if (method != "POST"):
-                path = path + "?_method=" + method
             if (file == None):
                 result = urllib2.urlopen(request, urllib.urlencode(data))
             else:
