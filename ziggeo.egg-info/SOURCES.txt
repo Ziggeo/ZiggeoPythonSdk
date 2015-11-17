@@ -8,6 +8,8 @@ ZiggeoConfig.py
 ZiggeoConnect.py
 ZiggeoStreams.py
 ZiggeoVideos.py
+__init__.py
+setup.cfg
 setup.py
 ziggeo.egg-info/PKG-INFO
 ziggeo.egg-info/SOURCES.txt
