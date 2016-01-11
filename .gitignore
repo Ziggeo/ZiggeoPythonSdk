@@ -1,3 +1,6 @@
 *.pyc
 build/
 *.whl
+dist
+dist/
+
