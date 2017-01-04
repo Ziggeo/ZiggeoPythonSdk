@@ -15,6 +15,9 @@ class ZiggeoStreams:
     def download_image(self, video_token_or_key, token_or_key):
         return self.__application.connect.get('/videos/' + video_token_or_key + '/streams/' + token_or_key + '/image')
 
+    def push_to_service(self, video_token_or_key, token_or_key, data = None):
+        return self.__application.connect.postJSON('/videos/' + video_token_or_key + '/streams/' + token_or_key + '/push', data)
+
     def delete(self, video_token_or_key, token_or_key):
         return self.__application.connect.delete('/videos/' + video_token_or_key + '/streams/' + token_or_key + '')
 

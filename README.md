@@ -1,9 +1,14 @@
-# Ziggeo Python Server SDK 1.6
+# Ziggeo Python Server SDK 1.15
 
-Ziggeo API (http://ziggeo.com) allows you to integrate video recording and playback with only
+Ziggeo API (https://ziggeo.com) allows you to integrate video recording and playback with only
 two lines of code in your site, service or app. This is the Python Server SDK repository.
 
 Pull requests welcome.
+
+
+## Installation
+
+pip install ziggeo
 
 
 ## Client-Side Integration
@@ -49,7 +54,7 @@ ziggeo = Ziggeo("*token*", "*private_key*", "*encryption_key*")
 ## Server-Side Methods
 
 ### Videos  
- 
+
 The videos resource allows you to access all single videos. Each video may contain more than one stream. 
  
 
@@ -66,7 +71,7 @@ Arguments
 - skip: *Skip the first [n] entries.* 
 - reverse: *Reverse the order in which videos are returned.* 
 - states: *Filter videos by state* 
-- tags: *Filter the search result to certain tags* 
+- tags: *Filter the search result to certain tags, encoded as a comma-separated string* 
 
 
 #### Get 
@@ -97,6 +102,18 @@ Download the image data file
 ziggeo.videos().download_image(token_or_key) 
 ``` 
  
+
+
+#### Push To Service 
+ 
+Push a video to a provided push service. 
+
+```python 
+ziggeo.videos().push_to_service(token_or_key, arguments = None) 
+``` 
+ 
+Arguments 
+- pushservicetoken: *Push Services's token (from the Push Services configured for the app)* 
 
 
 #### Update 
@@ -144,7 +161,7 @@ Arguments
 
 
 ### Streams  
- 
+
 The streams resource allows you to directly access all streams associated with a single video. 
  
 
@@ -188,6 +205,18 @@ Download the image data associated with the stream
 ziggeo.streams().download_image(video_token_or_key, token_or_key) 
 ``` 
  
+
+
+#### Push To Service 
+ 
+Push a stream to a provided push service. 
+
+```python 
+ziggeo.streams().push_to_service(video_token_or_key, token_or_key, arguments = None) 
+``` 
+ 
+Arguments 
+- pushservicetoken: *Push Services's token (from the Push Services configured for the app)* 
 
 
 #### Delete 
@@ -247,7 +276,7 @@ ziggeo.streams().bind(video_token_or_key, token_or_key, arguments = None)
 
 
 ### Authtokens  
- 
+
 The auth token resource allows you to manage authorization settings for video objects. 
  
 

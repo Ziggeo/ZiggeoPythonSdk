@@ -15,6 +15,9 @@ class ZiggeoVideos:
     def download_image(self, token_or_key):
         return self.__application.connect.get('/videos/' + token_or_key + '/image')
 
+    def push_to_service(self, token_or_key, data = None):
+        return self.__application.connect.postJSON('/videos/' + token_or_key + '/push', data)
+
     def update(self, token_or_key, data = None):
         return self.__application.connect.postJSON('/videos/' + token_or_key + '', data)
 
