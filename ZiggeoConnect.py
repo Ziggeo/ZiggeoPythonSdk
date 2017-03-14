@@ -12,7 +12,11 @@ class ZiggeoConnect:
             path = path + "?" + urllib.urlencode(data)        
         if (method != "GET" and method != "POST"):
             path = path + "?_method=" + method
-        request = urllib2.Request(self.__application.config.server_api_url + "/v1" + path)
+        server_api_url = self.__application.config.server_api_url
+        for k, v in self.__application.config.regions.iteritems():
+            if (self.__application.token.startswith(k)):
+                server_api_url = v
+        request = urllib2.Request(server_api_url + "/v1" + path)
         base64string = base64.encodestring('%s:%s' % (self.__application.token, self.__application.private_key)).replace('\n', '')
         request.add_header("Authorization", "Basic %s" % base64string)
         if (method == "GET"):   
