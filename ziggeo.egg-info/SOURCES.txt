@@ -6,6 +6,8 @@ ZiggeoAuth.py
 ZiggeoAuthtokens.py
 ZiggeoConfig.py
 ZiggeoConnect.py
+ZiggeoEffectProfileProcess.py
+ZiggeoEffectProfiles.py
 ZiggeoStreams.py
 ZiggeoVideos.py
 __init__.py

@@ -18,6 +18,9 @@ class ZiggeoVideos:
     def push_to_service(self, token_or_key, data = None):
         return self.__application.connect.postJSON('/videos/' + token_or_key + '/push', data)
 
+    def apply_effect(self, token_or_key, data = None):
+        return self.__application.connect.postJSON('/videos/' + token_or_key + '/effect', data)
+
     def update(self, token_or_key, data = None):
         return self.__application.connect.postJSON('/videos/' + token_or_key + '', data)
 
