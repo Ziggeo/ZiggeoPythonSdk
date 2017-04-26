@@ -1,5 +1,16 @@
+import sys
+
 from Ziggeo import Ziggeo
 
-ziggeo = Ziggeo("APP_TOKEN", "PRIVATE_KEY", "ENC_KEY")
+if(len(sys.argv) < 4):
+	print "Error\n"
+	print "Usage: $>python delete.py YOUR_API_TOKEN YOUR_PRIVATE_KEY VIDEO_TOKEN\n"
+	sys.exit()
 
-print ziggeo.videos().delete("VIDEO_TOKEN")
+api_token = sys.argv[1]
+private_key = sys.argv[2]
+video_token = sys.argv[3]
+
+ziggeo = Ziggeo(api_token, private_key)
+
+print ziggeo.videos().delete(video_token)
