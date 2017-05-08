@@ -13,4 +13,4 @@ video_token = sys.argv[3]
 
 ziggeo = Ziggeo(api_token, private_key)
 
-print ziggeo.videos().delete(video_token)
+print ziggeo.videos().get(video_token)
