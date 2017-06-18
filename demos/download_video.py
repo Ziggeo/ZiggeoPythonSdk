@@ -13,9 +13,10 @@ video_token = sys.argv[3]
 
 ziggeo = Ziggeo(api_token, private_key)
 video_data = ziggeo.videos().get(video_token)
-file_name = video_token+'.'+video_data["original_stream"]["video_type"]
+stream_token = video_data["default_stream"]["token"]
+file_name = video_token+"_"+stream_token+'.'+video_data["default_stream"]["video_type"]
 
-file = open(file_name, "w")
-downloaded_file = ziggeo.videos().download_video(video_token)
+file = open(file_name, "wb")
+downloaded_file = ziggeo.streams().download_video(video_token, stream_token)
 file.write(downloaded_file)
 file.close()
