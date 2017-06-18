@@ -16,6 +16,7 @@ video_data = ziggeo.videos().get(video_token)
 stream_token = video_data["default_stream"]["token"]
 file_name = video_token+"_"+stream_token+'.'+video_data["default_stream"]["video_type"]
 
+# We are using "wb" for write binary. To prevent windows from using write as non binary
 file = open(file_name, "wb")
 downloaded_file = ziggeo.streams().download_video(video_token, stream_token)
 file.write(downloaded_file)

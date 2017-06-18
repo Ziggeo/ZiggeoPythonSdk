@@ -18,7 +18,7 @@ def indexVideos(skip=0):
 		print "downloading video "+download_video_token
 		stream_token = video["default_stream"]["token"]
 		file_name = download_video_token+"_"+stream_token+'.'+video["default_stream"]["video_type"]
-
+		# We are using "wb" for write binary. To prevent windows from using write as non binary
 		file = open(file_name, "wb")
 		downloaded_file = ziggeo.streams().download_video(download_video_token, stream_token)
 		file.write(downloaded_file)
