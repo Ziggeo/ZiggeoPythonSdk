@@ -30,7 +30,7 @@ class ZiggeoConnect:
                 form = MultiPartForm()
                 for k, v in data.iteritems():
                     form.add_field(k, v)
-                form.add_file('file', ntpath.basename(file), fileHandle=open(file)) 
+                form.add_file('file', ntpath.basename(file), fileHandle=open(file, "rb"))
                 body = str(form)
                 request.add_header('Content-type', form.get_content_type())
                 request.add_header('Content-length', len(body))
