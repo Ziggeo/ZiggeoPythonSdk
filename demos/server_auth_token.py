@@ -1,5 +1,5 @@
 import sys
-import json, ast
+
 from Ziggeo import Ziggeo
 
 if(len(sys.argv) < 3):
@@ -12,4 +12,4 @@ private_key = sys.argv[2]
 
 ziggeo = Ziggeo(api_token, private_key)
 
-result = ziggeo.authtokens().create()
+print ziggeo.authtokens().create()
