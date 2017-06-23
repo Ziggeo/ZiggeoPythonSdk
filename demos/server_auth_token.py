@@ -10,6 +10,9 @@ if(len(sys.argv) < 3):
 api_token = sys.argv[1]
 private_key = sys.argv[2]
 
+arguments={}
+arguments["session_limit"] = 10
+arguments["grants"] = '{"read": "all"}'
 ziggeo = Ziggeo(api_token, private_key)
 
-print ziggeo.authtokens().create()
+print ziggeo.authtokens().create(arguments)
