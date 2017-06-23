@@ -13,4 +13,8 @@ encryption_key = sys.argv[3]
 
 ziggeo = Ziggeo(api_token, private_key, encryption_key)
 
-print ziggeo.authtokens().create()
+arguments={}
+arguments["session_limit"] = 10
+arguments["grants"] = '{"read": "all"}'
+
+print ziggeo.authtokens().create(arguments)
