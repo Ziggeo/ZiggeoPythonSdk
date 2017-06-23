@@ -17,4 +17,4 @@ arguments={}
 arguments["session_limit"] = 10
 arguments["grants"] = '{"read": "all"}'
 
-print ziggeo.authtokens().create(arguments)
+print ziggeo.auth().generate(arguments)
