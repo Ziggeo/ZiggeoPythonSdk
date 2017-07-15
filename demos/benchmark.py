@@ -12,20 +12,22 @@ private_key = sys.argv[2]
 video_file = sys.argv[3]
 ops_time = int(sys.argv[4])
 
-
+arguments = {}
+arguments['tags'] = "benchmark"
 ziggeo = Ziggeo(api_token, private_key)
 videos= []
 upload_time = time.time()
 for i in range(ops_time):
-	video = ziggeo.videos().create(file = video_file)
+	video = ziggeo.videos().create(arguments,file = video_file ) #adding 'benchmark' tag for uploaded video
 	videos.append(video['token'])
+	
 upload_time = time.time()-upload_time
 upload_time = upload_time/ops_time
 
 delete_time = time.time()
 for v in videos:
 	ziggeo.videos().delete(v)
-	print v
+
 delete_time = time.time()-delete_time
 delete_time = delete_time/ops_time
 
