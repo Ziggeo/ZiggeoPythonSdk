@@ -20,9 +20,14 @@ upload_time = time.time()
 for i in range(ops_time):
 	video = ziggeo.videos().create(arguments,file = video_file ) #adding 'benchmark' tag for uploaded video
 	videos.append(video['token'])
-	
+
 upload_time = time.time()-upload_time
 upload_time = upload_time/ops_time
+
+download_time = time.time()
+for v in videos:
+	ziggeo.videos().download_video(v)
+download_time = time.time()-download_time
 
 delete_time = time.time()
 for v in videos:
@@ -32,4 +37,5 @@ delete_time = time.time()-delete_time
 delete_time = delete_time/ops_time
 
 print "Upload: "+str(upload_time)
+print "Download: "+str(download_time)
 print "Delete: "+str(delete_time)
