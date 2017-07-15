@@ -12,13 +12,22 @@ private_key = sys.argv[2]
 video_file = sys.argv[3]
 ops_time = int(sys.argv[4])
 
-times = {'upload': 0, 'download': 0, 'delete':0}
-ziggeo = Ziggeo(api_token, private_key)
 
+ziggeo = Ziggeo(api_token, private_key)
+videos= []
 upload_time = time.time()
 for i in range(ops_time):
-	ziggeo.videos().create(file = video_file)
+	video = ziggeo.videos().create(file = video_file)
+	videos.append(video['token'])
 upload_time = time.time()-upload_time
-times['upload'] = upload_time/ops_time
+upload_time = upload_time/ops_time
 
-print "Upload: "+str(times['upload'])
+delete_time = time.time()
+for v in videos:
+	ziggeo.videos().delete(v)
+	print v
+delete_time = time.time()-delete_time
+delete_time = delete_time/ops_time
+
+print "Upload: "+str(upload_time)
+print "Delete: "+str(delete_time)
