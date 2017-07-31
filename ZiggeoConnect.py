@@ -11,6 +11,7 @@ except ImportError:
 
 from MultiPartForm import MultiPartForm
 
+
 class ZiggeoConnect:
     def __init__(self, application):
         self.__application = application
@@ -44,16 +45,21 @@ class ZiggeoConnect:
                 binary_data = data.encode("ascii")
                 result = urllib2.urlopen(request, binary_data, timeout)
             else:
-                form = MultiPartForm()
-                for k, v in data.iteritems():
-                    form.add_field(k, v)
-                form.add_file('file', ntpath.basename(file), fileHandle=open(file, "rb"))
-                body = str(form)
-                request.add_header('Content-type', form.get_content_type())
+                form_file = [('file', ntpath.basename(file), open(file, "rb"))]
+                content_type, body = MultiPartForm().encode(data, form_file)
+
+                request.add_header('Content-type', content_type)
                 request.add_header('Content-length', len(body))
                 result = urllib2.urlopen(request, body, timeout)
 
-        return result.read().decode("utf-8", 'ignore')
+        try:
+            accept_ranges = result.getheader('Accept-Ranges')
+            if (accept_ranges == 'bytes'):
+                return result.read()
+            else:
+                return result.read().decode('ascii')
+        except AttributeError as e:
+            return result.read()
 
     def requestJSON(self, method, path, data = None, file = None):
         return json.loads(self.request(method, path, data, file))
