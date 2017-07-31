@@ -1,0 +1,9 @@
+{% extends "layout.html" %}
+
+{% block content %}
+  {% if message %}
+    <h1 class="page-header text-danger text-center">{{message}}</h1>
+  {% else %}
+    <h1 class="page-header">Operation was successfully completed</h1>
+  {% endif %}
+{% endblock %}

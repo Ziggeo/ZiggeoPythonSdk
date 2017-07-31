@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+
+{% block content %}
+  <h1 class="page-header">{{title}}</h1>
+  <p class="text-success">Below is list of available pages</p>
+  <ul class="list-unstyled">
+    {% for key, value in navigation %}
+      <li><a href="{{key}}" class="btn btn-md btn-link">{{value}}</a></li>
+    {% endfor %}
+  </ul>
+{% endblock %}

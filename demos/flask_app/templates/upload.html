@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block header %}
+  <link rel="stylesheet" href="//assets-cdn.ziggeo.com/v2-stable/ziggeo.css" />
+  <script src="//assets-cdn.ziggeo.com/v1-stable/ziggeo.js"></script>
+  <script>var application = new ZiggeoApi.V2.Application({token: '{{api_token}}' });</script>
+{% endblock %}
+
+{% block content %}
+  <h1 class="page-header">{{title}}</h1>
+  <div class="row">
+    <div class="col-xs-12">
+      <ziggeorecorder ziggeo-video='{{api_token}}' ziggeo-theme="modern"></ziggeorecorder>
+    </div>
+  </div>
+{% endblock %}

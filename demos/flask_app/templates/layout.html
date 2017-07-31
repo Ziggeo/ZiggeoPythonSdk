@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% if title%}
+      <title>{{title}}</title>
+    {% else %}
+      <title>Ziggeo Application</title>
+    {% endif %}
+
+    <link rel="shortcut icon" href="{{url_for('static', filename='favicon.ico')}}">
+
+    <link rel="stylesheet" href="{{url_for('static', filename='bootstrap.min.css')}}" />
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}" />
+
+    {% block header %}{% endblock %}
+  </head>
+  <body>
+    <div id="page-wrapper">
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+              <span class="sr-only">Zigeo</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Ziggeo</a>
+          </div>
+
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+              {% for href, caption in navigation %}
+                <li><a class="btn btn-xs btn-link" href="{{ href }}">{{ caption }}</a></li>
+              {% endfor %}
+            </ul>
+          </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+      </nav>
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          <ul class=flashes>
+          {% for category, message in messages %}
+            <li class="alert alert-{{ category }}">{{ message }}</li>
+          {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
+
+      {# Content block #}
+      <div id="content" class="container">
+        {% block content %}{% endblock %}
+      </div>
+
+      {# Footer block #}
+      <div id="footer" class="container">
+        <hr class="separator"/>
+        {% block footer %}
+          &copy; Copyright 2017 by <a class="btn btn-link btn-xs" href="https://ziggeo.com">Ziggeo Inc.</a>
+        {% endblock %}
+
+        <script src="{{ url_for('static', filename='jquery.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>
+      </div>
+    </div>
+  </body>
+</html>

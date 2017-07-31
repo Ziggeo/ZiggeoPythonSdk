@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block header %}
+  <link rel="stylesheet" href="//assets-cdn.ziggeo.com/v2-stable/ziggeo.css" />
+  <script src="//assets-cdn.ziggeo.com/v2-stable/ziggeo.js"></script>
+  <script>// for Version 1 use ZiggeoApi.token = "{{api_token}}";</script>
+  <script>var application = new ZiggeoApi.V2.Application({token: '{{api_token}}' });</script>
+{% endblock %}
+
+{% block content %}
+  <h1 class="page-header">{{title}}</h1>
+  {% if videos %}
+    <div class="row">
+      {# embed_image_url, default_stream { duration, video_token, video_height, video_width,
+        submission_date, video_type, has_image }, embed_video_url, duration, #}
+    {% for video in videos %}
+      <div class="col-xs-12 col-sm-6 col-md-4">
+        <div class="thumbnail">
+          <ziggeoplayer
+            ziggeo-video='{{video.token}}'
+            ziggeo-theme="modern"
+          ></ziggeoplayer>
+          <div class="caption">
+            <p>
+              <a href="/video/{{video.default_stream.video_token}}" class="btn btn-xs btn-success">Single Video</a>
+              <a href="/download-video/{{video.default_stream.video_token}}" class="btn btn-xs btn-warning" download>Download Video</a>
+
+              <a href="/download-image/{{video.default_stream.video_token}}" class="btn btn-xs btn-primary" download>Download Image</a>
+              <a class="btn btn-xs btn-danger" onclick="jQuery.ajax('/video/{{video.default_stream.video_token}}', {method: 'DELETE'});">Delete Video</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  {% else %}
+    <h2> No video available! </h2>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block header %}
+  <link rel="stylesheet" href="//assets-cdn.ziggeo.com/v2-stable/ziggeo.css" />
+  <script src="//assets-cdn.ziggeo.com/v1-stable/ziggeo.js"></script>
+  <script>var application = new ZiggeoApi.V2.Application({token: '{{api_token}}' });</script>
+{% endblock %}
+
+{% block content %}
+  <h1 class="page-header">{{title}}</h1>
+  {% if video %}
+    <div class="row">
+      <div class="col-xs-12">
+        <ziggeoplayer ziggeo-video='{{video.token}}' ziggeo-theme="modern"></ziggeo>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 col-lg-2 col-lg-offset-5">
+        <form method="POST" action="video/">
+          <input name="tag" type="text" placeholder="Tag" class="form-control"/>
+          <input name="key" type="text" placeholder="Key" class="form-control"/>
+          <input type="submit" value="Make Changes" />
+        </form>
+      </div>
+    </div>
+  {% else %}
+    <h2> No video available! </h2>
+  {% endif %}
+{% endblock %}
