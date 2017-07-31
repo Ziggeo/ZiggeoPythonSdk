@@ -1,4 +1,4 @@
-import sys
+import sys, os
 
 from Ziggeo import Ziggeo
 
@@ -33,10 +33,12 @@ def indexVideos(skip=0):
         except UnicodeEncodeError as e:
             print("Video " + download_video_token + " can't be upload due to unicode error.")
             file.close()
+            delete_file(file_name)
             continue
 
         file.close()
         uploadVideo(file_name)
+        delete_file(file_name)
 
     if(len(video_list) > 0):
         indexVideos(skip + 2)
@@ -44,7 +46,14 @@ def indexVideos(skip=0):
 
 
 def uploadVideo(file_name = ""):
-    print ("uploading video " + file_name)
+    print ("uploading video " + str(file_name))
     ziggeo_target.videos().create(file = file_name)
+
+def delete_file(filename):
+    if os.path.exists(filename):
+        os.remove(filename)
+        print("Video, %s was removed from local directory." % filename)
+    else:
+        print("Sorry, I can not remove %s file." % filename)
 
 indexVideos(0)

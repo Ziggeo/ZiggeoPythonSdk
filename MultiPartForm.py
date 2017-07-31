@@ -1,79 +1,57 @@
-# Copyright (c) http://pymotw.com/2/urllib2/
-
-import itertools
+import codecs
 import mimetypes
-import urllib
+import sys
+import uuid
 
 try:
-    from urllib import request as urllib2
-    from email.generator import Generator
-    from io import StringIO
-    boundary = Generator._make_boundary()
+    import io
 except ImportError:
-    import urllib2
-    from cStringIO import StringIO
-    import mimetools
-    boundary = mimetools.choose_boundary()
+    pass # io is requiered in python3 but not available in python2
 
 class MultiPartForm(object):
-    """Accumulate the data to be used when posting a form."""
-
     def __init__(self):
-        self.form_fields = []
-        self.files = []
-        self.boundary = boundary
-        return
+        self.boundary = uuid.uuid4().hex
+        self.content_type = 'multipart/form-data; boundary={}'.format(self.boundary)
 
-    def get_content_type(self):
-        return 'multipart/form-data; boundary=%s' % self.boundary
+    @classmethod
+    def u(cls, s):
+        if sys.hexversion < 0x03000000 and isinstance(s, str):
+            s = s.decode('utf-8')
+        if sys.hexversion >= 0x03000000 and isinstance(s, bytes):
+            s = s.decode('utf-8')
+        return s
 
-    def add_field(self, name, value):
-        """Add a simple field to the form data."""
-        self.form_fields.append((name, value))
-        return
+    def iter(self, fields, files):
+        """
+        fields is a sequence of (name, value) elements for regular form fields.
+        files is a sequence of (name, filename, file-type) elements for data to be uploaded as files
+        Yield body's chunk as bytes
+        """
+        encoder = codecs.getencoder('utf-8')
+        for (key, value) in fields.items():
+            key = self.u(key)
+            yield encoder('--{}\r\n'.format(self.boundary))
+            yield encoder(self.u('Content-Disposition: form-data; name="{}"\r\n').format(key))
+            yield encoder('\r\n')
+            if isinstance(value, int) or isinstance(value, float):
+                value = str(value)
+            yield encoder(self.u(value))
+            yield encoder('\r\n')
+        for (key, filename, fd) in files:
+            key = self.u(key)
+            filename = self.u(filename)
+            yield encoder('--{}\r\n'.format(self.boundary))
+            yield encoder(self.u('Content-Disposition: form-data; name="{}"; filename="{}"\r\n').format(key, filename))
+            yield encoder('Content-Type: {}\r\n'.format(mimetypes.guess_type(filename)[0] or 'application/octet-stream'))
+            yield encoder('\r\n')
+            with fd:
+                buff = fd.read()
+                yield (buff, len(buff))
+            yield encoder('\r\n')
+        yield encoder('--{}--\r\n'.format(self.boundary))
 
-    def add_file(self, fieldname, filename, fileHandle, mimetype=None):
-        """Add a file to be uploaded."""
-        body = fileHandle.read()
-        if mimetype is None:
-            mimetype = mimetypes.guess_type(filename)[0] or 'application/octet-stream'
-        self.files.append((fieldname, filename, mimetype, body))
-        return
-
-    def __str__(self):
-        """Return a string representing the form data, including attached files."""
-        # Build a list of lists, each containing "lines" of the
-        # request.  Each part is separated by a boundary string.
-        # Once the list is built, return a string where each
-        # line is separated by '\r\n'.
-        parts = []
-        part_boundary = '--' + self.boundary
-
-        # Add the form fields
-        parts.extend(
-            [ part_boundary,
-              'Content-Disposition: form-data; name="%s"' % name,
-              '',
-              value,
-            ]
-            for name, value in self.form_fields
-            )
-
-        # Add the files to upload
-        parts.extend(
-            [ part_boundary,
-              'Content-Disposition: file; name="%s"; filename="%s"' % \
-                 (field_name, filename),
-              'Content-Type: %s' % content_type,
-              '',
-              body,
-            ]
-            for field_name, filename, content_type, body in self.files
-            )
-
-        # Flatten the list and add closing boundary marker,
-        # then return CR+LF separated data
-        flattened = list(itertools.chain(*parts))
-        flattened.append('--' + self.boundary + '--')
-        flattened.append('')
-        return '\r\n'.join(flattened)
+    def encode(self, fields, files):
+        body = io.BytesIO()
+        for chunk, chunk_len in self.iter(fields, files):
+            body.write(chunk)
+        return self.content_type, body.getvalue()

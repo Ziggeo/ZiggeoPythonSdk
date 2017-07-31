@@ -4,7 +4,7 @@ from Ziggeo import Ziggeo
 
 if(len(sys.argv) < 4):
 	print ("Error\n")
-	print ("Usage: $>python delete.py YOUR_API_TOKEN YOUR_PRIVATE_KEY VIDEO_TOKEN\n")
+	print ("Usage: $>python get_video.py YOUR_API_TOKEN YOUR_PRIVATE_KEY VIDEO_TOKEN\n")
 	sys.exit()
 
 api_token = sys.argv[1]
