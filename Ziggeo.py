@@ -6,7 +6,7 @@ from ZiggeoEffectProfiles import ZiggeoEffectProfiles
 from ZiggeoEffectProfileProcess import ZiggeoEffectProfileProcess
 from ZiggeoAuthtokens import ZiggeoAuthtokens
 from ZiggeoAuth import ZiggeoAuth
-        
+
 class Ziggeo:
     def __init__(self, token, private_key, encryption_key = None):
         self.token = token
@@ -20,7 +20,7 @@ class Ziggeo:
         self.__effectProfileProcess = None
         self.__authtokens = None
         self.__auth = None
-        
+
     def videos(self):
         if (self.__videos == None):
             self.__videos = ZiggeoVideos(self)

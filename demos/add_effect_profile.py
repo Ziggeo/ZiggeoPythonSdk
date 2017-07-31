@@ -3,8 +3,8 @@ import sys
 from Ziggeo import Ziggeo
 
 if(len(sys.argv) < 4):
-	print "Error\n"
-	print "Usage: $>python add_effect_profile.py YOUR_API_TOKEN YOUR_PRIVATE_KEY \"EFFECT_TITLE\" [EFFECT_TOKEN]\n"
+	print ("Error\n")
+	print ("Usage: $>python add_effect_profile.py YOUR_API_TOKEN YOUR_PRIVATE_KEY \"EFFECT_TITLE\" [EFFECT_TOKEN]\n")
 	sys.exit()
 
 api_token = sys.argv[1]
@@ -17,6 +17,6 @@ else:
 
 ziggeo = Ziggeo(api_token, private_key)
 if(effect_token ==""):
-	print ziggeo.effectProfiles().create({"title": effect_title, "token": None})
+	print (ziggeo.effectProfiles().create({"title": effect_title, "token": None}))
 else:
-	print ziggeo.effectProfiles().create({"title": effect_title, "token": effect_token})
+	print (ziggeo.effectProfiles().create({"title": effect_title, "token": effect_token}))

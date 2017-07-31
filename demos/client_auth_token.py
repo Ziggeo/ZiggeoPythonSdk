@@ -3,8 +3,8 @@ import sys
 from Ziggeo import Ziggeo
 
 if(len(sys.argv) < 4):
-	print "Error\n"
-	print "Usage: $>python client_auth_token.py YOUR_API_TOKEN YOUR_PRIVATE_KEY ENCRYPTION_KEY \n"
+	print ("Error\n")
+	print ("Usage: $>python client_auth_token.py YOUR_API_TOKEN YOUR_PRIVATE_KEY ENCRYPTION_KEY \n")
 	sys.exit()
 
 api_token = sys.argv[1]
@@ -17,4 +17,4 @@ arguments={}
 arguments["session_limit"] = 10
 arguments["grants"] = '{"read": "all"}'
 
-print ziggeo.auth().generate(arguments)
+print (ziggeo.auth().generate(arguments))

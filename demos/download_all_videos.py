@@ -3,8 +3,8 @@ import sys
 from Ziggeo import Ziggeo
 
 if(len(sys.argv) < 3):
-	print "Error\n"
-	print "Usage: $>python download_all_videos.py YOUR_API_TOKEN YOUR_PRIVATE_KEY\n"
+	print ("Error\n")
+	print ("Usage: $>python download_all_videos.py YOUR_API_TOKEN YOUR_PRIVATE_KEY\n")
 	sys.exit()
 
 api_token = sys.argv[1]
@@ -15,7 +15,7 @@ def indexVideos(skip=0):
 	video_list = ziggeo.videos().index({"limit":100, "skip":skip})
 	for video in video_list:
 		download_video_token = video["token"]
-		print "downloading video "+download_video_token
+		print ("downloading video "+download_video_token)
 		stream_token = video["default_stream"]["token"]
 		file_name = download_video_token+"_"+stream_token+'.'+video["default_stream"]["video_type"]
 		# We are using "wb" for write binary. To prevent windows from using write as non binary

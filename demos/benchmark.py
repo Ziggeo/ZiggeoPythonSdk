@@ -3,8 +3,8 @@ import sys, time
 from Ziggeo import Ziggeo
 import json
 if(len(sys.argv) < 5):
-	print "Error\n"
-	print "Usage: $>python benchmark.py YOUR_API_TOKEN YOUR_PRIVATE_KEY VIDEO_FILE OPERATION_TIME\n"
+	print ("Error\n")
+	print ("Usage: $>python benchmark.py YOUR_API_TOKEN YOUR_PRIVATE_KEY VIDEO_FILE OPERATION_TIME\n")
 	sys.exit()
 
 api_token = sys.argv[1]
@@ -36,6 +36,6 @@ for v in videos:
 delete_time = time.time()-delete_time
 delete_time = delete_time/ops_time
 
-print "Upload: "+str(upload_time)
-print "Download: "+str(download_time)
-print "Delete: "+str(delete_time)
+print ("Upload: "+str(upload_time))
+print ("Download: "+str(download_time))
+print ("Delete: "+str(delete_time))

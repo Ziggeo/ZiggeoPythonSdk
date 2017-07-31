@@ -1,11 +1,19 @@
 # Copyright (c) http://pymotw.com/2/urllib2/
 
 import itertools
-import mimetools
 import mimetypes
-from cStringIO import StringIO
 import urllib
-import urllib2
+
+try:
+    from urllib import request as urllib2
+    from email.generator import Generator
+    from io import StringIO
+    boundary = Generator._make_boundary()
+except ImportError:
+    import urllib2
+    from cStringIO import StringIO
+    import mimetools
+    boundary = mimetools.choose_boundary()
 
 class MultiPartForm(object):
     """Accumulate the data to be used when posting a form."""
@@ -13,9 +21,9 @@ class MultiPartForm(object):
     def __init__(self):
         self.form_fields = []
         self.files = []
-        self.boundary = mimetools.choose_boundary()
+        self.boundary = boundary
         return
-    
+
     def get_content_type(self):
         return 'multipart/form-data; boundary=%s' % self.boundary
 
@@ -31,16 +39,16 @@ class MultiPartForm(object):
             mimetype = mimetypes.guess_type(filename)[0] or 'application/octet-stream'
         self.files.append((fieldname, filename, mimetype, body))
         return
-    
+
     def __str__(self):
         """Return a string representing the form data, including attached files."""
         # Build a list of lists, each containing "lines" of the
         # request.  Each part is separated by a boundary string.
         # Once the list is built, return a string where each
-        # line is separated by '\r\n'.  
+        # line is separated by '\r\n'.
         parts = []
         part_boundary = '--' + self.boundary
-        
+
         # Add the form fields
         parts.extend(
             [ part_boundary,
@@ -50,7 +58,7 @@ class MultiPartForm(object):
             ]
             for name, value in self.form_fields
             )
-        
+
         # Add the files to upload
         parts.extend(
             [ part_boundary,
@@ -62,7 +70,7 @@ class MultiPartForm(object):
             ]
             for field_name, filename, content_type, body in self.files
             )
-        
+
         # Flatten the list and add closing boundary marker,
         # then return CR+LF separated data
         flattened = list(itertools.chain(*parts))
