@@ -14,7 +14,7 @@ stream_token = sys.argv[4]
 
 ziggeo = Ziggeo(api_token, private_key)
 
-file_name = video_token + "_" + stream_token + ".png"
+file_name = video_token + "_" + stream_token + ".jpg"
 file = open('assets/' + file_name, "wb")
 downloaded_file = ziggeo.streams().download_image(video_token, stream_token)
 file.write(downloaded_file)
