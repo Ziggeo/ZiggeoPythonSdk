@@ -4,7 +4,7 @@ from Ziggeo import Ziggeo
 import json
 if(len(sys.argv) < 6):
 	print ("Error\n")
-	print ("Usage: $>python push_video.py YOUR_API_TOKEN YOUR_PRIVATE_KEY VIDEO_TOKEN STREAM_TOKEN PUSH_SERVICE_TOKEN\n")
+	print ("Usage: $>python stream_push.py YOUR_API_TOKEN YOUR_PRIVATE_KEY VIDEO_TOKEN STREAM_TOKEN PUSH_SERVICE_TOKEN\n")
 	sys.exit()
 
 api_token = sys.argv[1]

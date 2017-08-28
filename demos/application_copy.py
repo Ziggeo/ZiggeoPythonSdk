@@ -4,7 +4,7 @@ from Ziggeo import Ziggeo
 
 if(len(sys.argv) < 5):
     print ("Error\n")
-    print ("Usage: $>python copy_application.py SOURCE_API_TOKEN SOURCE_PRIVATE_KEY TARGET_API_TOKEN TARGET_PRIVATE_KEY\n")
+    print ("Usage: $>python application_copy.py SOURCE_API_TOKEN SOURCE_PRIVATE_KEY TARGET_API_TOKEN TARGET_PRIVATE_KEY\n")
     sys.exit()
 
 from pprint import pprint

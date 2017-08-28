@@ -4,7 +4,7 @@ from Ziggeo import Ziggeo
 
 if(len(sys.argv) < 4):
 	print ("Error\n")
-	print ("Usage: $>python update_server_auth_token.py YOUR_API_TOKEN YOUR_PRIVATE_KEY AUTHTOKEN\n")
+	print ("Usage: $>python authtoken_update.py YOUR_API_TOKEN YOUR_PRIVATE_KEY AUTHTOKEN\n")
 	sys.exit()
 
 api_token = sys.argv[1]

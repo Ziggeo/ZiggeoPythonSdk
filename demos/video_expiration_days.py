@@ -4,7 +4,7 @@ from Ziggeo import Ziggeo
 
 if(len(sys.argv) < 5):
 	print ("Error\n")
-	print ("Usage: $>python expiration_days_video.py YOUR_API_TOKEN YOUR_PRIVATE_KEY VIDEO_TOKEN EXPIRATION_DAYS\n")
+	print ("Usage: $>python video_expiration_days.py YOUR_API_TOKEN YOUR_PRIVATE_KEY VIDEO_TOKEN EXPIRATION_DAYS\n")
 	sys.exit()
 
 api_token = sys.argv[1]
