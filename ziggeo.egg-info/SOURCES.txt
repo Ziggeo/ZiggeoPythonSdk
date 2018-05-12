@@ -2,6 +2,7 @@ LICENSE.md
 MultiPartForm.py
 README.md
 Ziggeo.py
+ZiggeoAnalytics.py
 ZiggeoAuth.py
 ZiggeoAuthtokens.py
 ZiggeoConfig.py
@@ -10,6 +11,7 @@ ZiggeoEffectProfileProcess.py
 ZiggeoEffectProfiles.py
 ZiggeoStreams.py
 ZiggeoVideos.py
+ZiggeoWebhooks.py
 __init__.py
 setup.cfg
 setup.py

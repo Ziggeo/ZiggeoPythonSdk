@@ -6,8 +6,14 @@ class ZiggeoVideos:
     def index(self, data = None):
         return self.__application.connect.getJSON('/videos/', data)
 
+    def count(self, data = None):
+        return self.__application.connect.getJSON('/videos/count', data)
+
     def get(self, token_or_key):
         return self.__application.connect.getJSON('/videos/' + token_or_key + '')
+
+    def get_bulk(self, data = None):
+        return self.__application.connect.postJSON('/videos/get_bulk', data)
 
     def download_video(self, token_or_key):
         return self.__application.connect.get('/videos/' + token_or_key + '/video')
@@ -24,9 +30,15 @@ class ZiggeoVideos:
     def update(self, token_or_key, data = None):
         return self.__application.connect.postJSON('/videos/' + token_or_key + '', data)
 
+    def update_bulk(self, data = None):
+        return self.__application.connect.postJSON('/videos/update_bulk', data)
+
     def delete(self, token_or_key):
         return self.__application.connect.delete('/videos/' + token_or_key + '')
 
     def create(self, data = None, file = None):
         return self.__application.connect.postJSON('/videos/', data, file)
+
+    def analytics(self, token_or_key, data = None):
+        return self.__application.connect.postJSON('/videos/' + token_or_key + '/analytics', data)
 
