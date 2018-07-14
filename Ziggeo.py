@@ -4,6 +4,8 @@ from ZiggeoVideos import ZiggeoVideos
 from ZiggeoStreams import ZiggeoStreams
 from ZiggeoEffectProfiles import ZiggeoEffectProfiles
 from ZiggeoEffectProfileProcess import ZiggeoEffectProfileProcess
+from ZiggeoMetaProfiles import ZiggeoMetaProfiles
+from ZiggeoMetaProfileProcess import ZiggeoMetaProfileProcess
 from ZiggeoAuthtokens import ZiggeoAuthtokens
 from ZiggeoAuth import ZiggeoAuth
 
@@ -18,6 +20,8 @@ class Ziggeo:
         self.__streams = None
         self.__effectProfiles = None
         self.__effectProfileProcess = None
+        self.__metaProfiles = None
+        self.__metaProfileProcess = None
         self.__authtokens = None
         self.__auth = None
 
@@ -40,6 +44,16 @@ class Ziggeo:
         if (self.__effectProfileProcess == None):
             self.__effectProfileProcess = ZiggeoEffectProfileProcess(self)
         return self.__effectProfileProcess
+
+    def metaProfiles(self):
+        if (self.__metaProfiles == None):
+            self.__metaProfiles = ZiggeoMetaProfiles(self)
+        return self.__metaProfiles
+
+    def metaProfileProcess(self):
+        if (self.__metaProfileProcess == None):
+            self.__metaProfileProcess = ZiggeoMetaProfileProcess(self)
+        return self.__metaProfileProcess
 
     def authtokens(self):
         if (self.__authtokens == None):

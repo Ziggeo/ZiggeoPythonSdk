@@ -9,6 +9,8 @@ ZiggeoConfig.py
 ZiggeoConnect.py
 ZiggeoEffectProfileProcess.py
 ZiggeoEffectProfiles.py
+ZiggeoMetaProfileProcess.py
+ZiggeoMetaProfiles.py
 ZiggeoStreams.py
 ZiggeoVideos.py
 ZiggeoWebhooks.py

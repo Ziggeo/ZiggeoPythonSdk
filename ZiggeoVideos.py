@@ -15,11 +15,17 @@ class ZiggeoVideos:
     def get_bulk(self, data = None):
         return self.__application.connect.postJSON('/videos/get_bulk', data)
 
+    def stats_bulk(self, data = None):
+        return self.__application.connect.postJSON('/videos/stats_bulk', data)
+
     def download_video(self, token_or_key):
         return self.__application.connect.get('/videos/' + token_or_key + '/video')
 
     def download_image(self, token_or_key):
         return self.__application.connect.get('/videos/' + token_or_key + '/image')
+
+    def get_stats(self, token_or_key):
+        return self.__application.connect.getJSON('/videos/' + token_or_key + '/stats')
 
     def push_to_service(self, token_or_key, data = None):
         return self.__application.connect.postJSON('/videos/' + token_or_key + '/push', data)
