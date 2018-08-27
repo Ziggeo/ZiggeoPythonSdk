@@ -33,6 +33,9 @@ class ZiggeoVideos:
     def apply_effect(self, token_or_key, data = None):
         return self.__application.connect.postJSON('/videos/' + token_or_key + '/effect', data)
 
+    def apply_meta(self, token_or_key, data = None):
+        return self.__application.connect.postJSON('/videos/' + token_or_key + '/metaprofile', data)
+
     def update(self, token_or_key, data = None):
         return self.__application.connect.postJSON('/videos/' + token_or_key + '', data)
 
