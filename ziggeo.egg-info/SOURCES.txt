@@ -3,6 +3,7 @@ MultiPartForm.py
 README.md
 Ziggeo.py
 ZiggeoAnalytics.py
+ZiggeoApplication.py
 ZiggeoAuth.py
 ZiggeoAuthtokens.py
 ZiggeoConfig.py

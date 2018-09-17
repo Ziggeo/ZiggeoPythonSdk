@@ -1,4 +1,4 @@
-# Ziggeo Python Server SDK 1.7
+# Ziggeo Python Server SDK 1.8
 
 Ziggeo API (https://ziggeo.com) allows you to integrate video recording and playback with only
 two lines of code in your site, service or app. This is the Python Server SDK repository.
@@ -441,6 +441,54 @@ Arguments
 - grants: *Permissions this tokens grants* 
 
 
+### Application  
+
+The application token resource allows you to manage your application. 
+ 
+
+#### Get 
+ 
+Read application. 
+
+```python 
+ziggeo.application().get() 
+``` 
+ 
+
+
+#### Update 
+ 
+Update application. 
+
+```python 
+ziggeo.application().update(arguments = None) 
+``` 
+ 
+Arguments 
+- volatile: *Will this object automatically be deleted if it remains empty?* 
+- name: *Name of the application* 
+- auth_token_required_for_create: *Require auth token for creating videos* 
+- auth_token_required_for_update: *Require auth token for updating videos* 
+- auth_token_required_for_read: *Require auth token for reading videos* 
+- auth_token_required_for_destroy: *Require auth token for deleting videos* 
+- client_can_index_videos: *Client is allowed to perform the index operation* 
+- client_cannot_access_unaccepted_videos: *Client cannot view unaccepted videos* 
+- enable_video_subpages: *Enable hosted video pages* 
+- enable_facebook: *Enable Facebook Support for hosted video pages* 
+
+
+#### Get Stats 
+ 
+Read application stats 
+
+```python 
+ziggeo.application().get_stats(arguments = None) 
+``` 
+ 
+Arguments 
+- period: *Optional. Can be 'year' or 'month'.* 
+
+
 ### EffectProfiles  
 
 The effect profiles resource allows you to access and create effect profiles for your app. Each effect profile may contain one process or more. 
@@ -457,6 +505,7 @@ ziggeo.effectProfiles().create(arguments = None)
 Arguments 
 - key: *Effect profile key.* 
 - title: *Effect profile title.* 
+- default_effect: *Boolean. If TRUE, sets an effect profile as default. If FALSE, removes the default status for the given effect* 
 
 
 #### Index 
@@ -491,6 +540,18 @@ Delete the effect profile
 ziggeo.effectProfiles().delete(token_or_key) 
 ``` 
  
+
+
+#### Update 
+ 
+Updates an effect profile. 
+
+```python 
+ziggeo.effectProfiles().update(token_or_key, arguments = None) 
+``` 
+ 
+Arguments 
+- default_effect: *Boolean. If TRUE, sets an effect profile as default. If FALSE, removes the default status for the given effect* 
 
 
 ### EffectProfileProcess  
@@ -552,9 +613,9 @@ ziggeo.effectProfileProcess().create_watermark_process(effect_token_or_key, argu
  
 Arguments 
 - file: *Image file to be attached* 
-- vertical: *Specify the vertical position of your watermark (a value between 0.0 and 1.0)* 
-- horizontal: *Specify the horizontal position of your watermark (a value between 0.0 and 1.0)* 
-- scale: *Specify the image scale of your watermark (a value between 0.0 and 1.0)* 
+- vertical_position: *Specify the vertical position of your watermark (a value between 0.0 and 1.0)* 
+- horizontal_position: *Specify the horizontal position of your watermark (a value between 0.0 and 1.0)* 
+- video_scale: *Specify the image scale of your watermark (a value between 0.0 and 1.0)* 
 
 
 ### MetaProfiles  

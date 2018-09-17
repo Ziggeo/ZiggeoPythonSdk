@@ -13,8 +13,9 @@ from MultiPartForm import MultiPartForm
 
 
 class ZiggeoConnect:
-    def __init__(self, application):
+    def __init__(self, application, baseuri):
         self.__application = application
+        self.__baseuri = baseuri
 
     def request(self, method, path, data = None, file = None, timeout=60):
         path = path.encode("ascii", "ignore")
@@ -22,15 +23,11 @@ class ZiggeoConnect:
             path = path.decode('ascii', 'ignore') + "?" + urllib.urlencode(data)
         if (method != "GET" and method != "POST"):
             path = path.decode('ascii', 'ignore') + "?_method=" + method
-        server_api_url = self.__application.config.server_api_url
-        for k, v in self.__application.config.regions.items():
-            if (self.__application.token.startswith(k)):
-                server_api_url = v
 
         if not isinstance(path, basestring):
             path = path.decode("ascii", "ignore")
 
-        request = urllib2.Request(server_api_url + "/v1" + path)
+        request = urllib2.Request(self.__baseuri + path)
 
         base64string = base64.encodestring(('%s:%s' % (self.__application.token, self.__application.private_key)).encode()).decode().replace('\n', '')
 

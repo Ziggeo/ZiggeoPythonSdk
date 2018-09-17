@@ -4,8 +4,8 @@ class ZiggeoWebhooks:
         self.__application = application
 
     def create(self, data = None):
-        return self.__application.connect.post('/api/hook', data)
+        return self.__application.connect.post('/v1/api/hook', data)
 
     def delete(self, data = None):
-        return self.__application.connect.post('/api/removehook', data)
+        return self.__application.connect.post('/v1/api/removehook', data)
 

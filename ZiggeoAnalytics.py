@@ -4,5 +4,5 @@ class ZiggeoAnalytics:
         self.__application = application
 
     def get(self, data = None):
-        return self.__application.connect.postJSON('/analytics/get', data)
+        return self.__application.connect.postJSON('/v1/analytics/get', data)
 

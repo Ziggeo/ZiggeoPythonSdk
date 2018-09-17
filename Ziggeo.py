@@ -4,6 +4,7 @@ from ZiggeoAuth import ZiggeoAuth
 from ZiggeoVideos import ZiggeoVideos
 from ZiggeoStreams import ZiggeoStreams
 from ZiggeoAuthtokens import ZiggeoAuthtokens
+from ZiggeoApplication import ZiggeoApplication
 from ZiggeoEffectProfiles import ZiggeoEffectProfiles
 from ZiggeoEffectProfileProcess import ZiggeoEffectProfileProcess
 from ZiggeoMetaProfiles import ZiggeoMetaProfiles
@@ -18,11 +19,21 @@ class Ziggeo:
         self.private_key = private_key
         self.encryption_key = encryption_key
         self.config = ZiggeoConfig()
-        self.connect = ZiggeoConnect(self)
+        server_api_url = self.config.server_api_url
+        for k, v in self.config.regions.items():
+            if (self.token.startswith(k)):
+                server_api_url = v
+        self.connect = ZiggeoConnect(self, server_api_url)
+        api_url = self.config.api_url
+        for k, v in self.config.api_regions.items():
+            if (self.token.startswith(k)):
+                api_url = v
+        self.api_connect = ZiggeoConnect(self, api_url)
         self.__auth = None
         self.__videos = None
         self.__streams = None
         self.__authtokens = None
+        self.__application = None
         self.__effectProfiles = None
         self.__effectProfileProcess = None
         self.__metaProfiles = None
@@ -46,6 +57,10 @@ class Ziggeo:
         if (self.__authtokens == None):
             self.__authtokens = ZiggeoAuthtokens(self)
         return self.__authtokens
+    def application(self):
+        if (self.__application == None):
+            self.__application = ZiggeoApplication(self)
+        return self.__application
     def effectProfiles(self):
         if (self.__effectProfiles == None):
             self.__effectProfiles = ZiggeoEffectProfiles(self)
