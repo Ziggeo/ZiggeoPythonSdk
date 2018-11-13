@@ -1,4 +1,4 @@
-# Ziggeo Python Server SDK 1.8
+# Ziggeo Python Server SDK 1.12
 
 Ziggeo API (https://ziggeo.com) allows you to integrate video recording and playback with only
 two lines of code in your site, service or app. This is the Python Server SDK repository.
@@ -474,7 +474,6 @@ Arguments
 - client_can_index_videos: *Client is allowed to perform the index operation* 
 - client_cannot_access_unaccepted_videos: *Client cannot view unaccepted videos* 
 - enable_video_subpages: *Enable hosted video pages* 
-- enable_facebook: *Enable Facebook Support for hosted video pages* 
 
 
 #### Get Stats 
