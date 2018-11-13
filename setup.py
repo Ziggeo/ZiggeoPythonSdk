@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 
-requirements = ['pycrypto>=2.6.1']
+requirements = ['pycryptodome>=3.7.0']
 
 
 setup(
