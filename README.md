@@ -1,4 +1,4 @@
-# Ziggeo Python Server SDK 1.15
+# Ziggeo Python Server SDK 2.15
 
 Ziggeo API (https://ziggeo.com) allows you to integrate video recording and playback with only
 two lines of code in your site, service or app. This is the Python Server SDK repository.
