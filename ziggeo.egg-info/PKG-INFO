@@ -1,6 +1,6 @@
 Metadata-Version: 1.1
 Name: ziggeo
-Version: 2.15
+Version: 2.17
 Summary: Ziggeo SDK for python
 Home-page: http://github.com/Ziggeo/ZiggeoPythonSdk
 Author: Ziggeo
@@ -11,4 +11,4 @@ Keywords: Ziggeo video-upload
 Platform: UNKNOWN
 Classifier: Intended Audience :: Developers
 Classifier: License :: OSI Approved :: Apache Software License
-Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3

@@ -18,3 +18,6 @@ class ZiggeoEffectProfileProcess:
     def create_watermark_process(self, effect_token_or_key, data = None, file = None):
         return self.__application.connect.postJSON('/v1/effects/' + effect_token_or_key + '/process/watermark', data, file)
 
+    def edit_watermark_process(self, effect_token_or_key, token_or_key, data = None, file = None):
+        return self.__application.connect.postJSON('/v1/effects/' + effect_token_or_key + '/process/watermark/' + token_or_key + '', data, file)
+
