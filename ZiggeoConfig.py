@@ -7,6 +7,5 @@ class ZiggeoConfig:
         self.api_url = "https://api-us-east-1.ziggeo.com"
 
         self.api_regions = {"r1":"https://api-eu-west-1.ziggeo.com"}
-        
         self.resilience_factor = 5
         self.request_timeout = 60
