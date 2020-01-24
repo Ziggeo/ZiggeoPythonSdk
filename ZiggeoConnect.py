@@ -24,7 +24,7 @@ class ZiggeoConnect:
         for trying in range(0, self.__application.config.resilience_factor) :
             request_result = self.singleRequest(method, path, data, file, timeout)
             if (request_result.code < 500 and request_result.code >= 200):
-                if request_result.code != 200:
+                if request_result.code >= 300:
                     return "{\"code\": \""+str(request_result.code)+"\", \"msg\": \""+request_result.msg+"\"}"
                 try:
                     accept_ranges = request_result.getheader('Accept-Ranges')
@@ -61,14 +61,22 @@ class ZiggeoConnect:
             if (file == None):
                 data = urllib.urlencode(data)
                 binary_data = data.encode("ascii")
-                result = urllib2.urlopen(request, binary_data, timeout)
+                try:
+                    result = urllib2.urlopen(request, binary_data, timeout)
+                    return result
+                except urllib2.HTTPError as e:
+                    return e
             else:
                 form_file = [('file', ntpath.basename(file), open(file, "rb"))]
                 content_type, body = MultiPartForm().encode(data, form_file)
 
                 request.add_header('Content-type', content_type)
                 request.add_header('Content-length', len(body))
-                result = urllib2.urlopenprint(result.status)(request, body, timeout)
+                try:
+                    result = urllib2.urlopen(request, body, timeout)
+                    return result
+                except urllib2.HTTPError as e:
+                    return e
         
 
     def requestJSON(self, method, path, data = None, file = None):
