@@ -23,44 +23,55 @@ class ZiggeoConnect:
         
         for trying in range(0, self.__application.config.resilience_factor) :
             request_result = self.singleRequest(method, path, data, file, timeout)
+
             if (request_result.code < 500 and request_result.code >= 200):
                 if request_result.code >= 300:
                     return "{\"code\": \""+str(request_result.code)+"\", \"msg\": \""+request_result.msg+"\"}"
+
                 try:
                     accept_ranges = request_result.getheader('Accept-Ranges')
                     if (accept_ranges == 'bytes'):
                         return request_result.read()
                     else:
                         return request_result.read().decode('ascii')
+
                 except AttributeError as e:
                     return request_result.read()
                 break
+                
         return "{\"code\": \""+str(request_result.code)+"\", \"msg\": \""+request_result.msg+"\"}"            
 
     def singleRequest(self, method, path, data, file, timeout):
         path = path.encode("ascii", "ignore")
+
         if (method == "GET" and data != None):
             path = path.decode('ascii', 'ignore') + "?" + urllib.urlencode(data)
+
         if (method != "GET" and method != "POST"):
             path = path.decode('ascii', 'ignore') + "?_method=" + method
+
         if not isinstance(path, basestring):
             path = path.decode("ascii", "ignore")
 
         request = urllib2.Request(self.__baseuri + path)
         base64string = base64.encodestring(('%s:%s' % (self.__application.token, self.__application.private_key)).encode()).decode().replace('\n', '')
         request.add_header("Authorization", "Basic %s" % base64string)
+
         if (method == "GET"):
             try: 
                 result = urllib2.urlopen(request, None, timeout)
                 return result
             except urllib2.HTTPError as e:
                 return e
+
         else:
             if (data == None):
                 data = {}
+
             if (file == None):
                 data = urllib.urlencode(data)
                 binary_data = data.encode("ascii")
+
                 try:
                     result = urllib2.urlopen(request, binary_data, timeout)
                     return result
@@ -72,6 +83,7 @@ class ZiggeoConnect:
 
                 request.add_header('Content-type', content_type)
                 request.add_header('Content-length', len(body))
+
                 try:
                     result = urllib2.urlopen(request, body, timeout)
                     return result
@@ -81,6 +93,7 @@ class ZiggeoConnect:
 
     def requestJSON(self, method, path, data = None, file = None):
         return json.loads(self.request(method, path, data, file))
+
     def get(self, path, data = None, file = None):
         return self.request("GET", path, data, file)
 
