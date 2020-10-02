@@ -53,9 +53,12 @@ class ZiggeoConnect:
         if not isinstance(path, basestring):
             path = path.decode("ascii", "ignore")
 
-        request = urllib2.Request(self.__baseuri + path)
-        base64string = base64.encodestring(('%s:%s' % (self.__application.token, self.__application.private_key)).encode()).decode().replace('\n', '')
-        request.add_header("Authorization", "Basic %s" % base64string)
+        if (path.split(":")[0] == 'https'): #S3 based upload
+            request = urllib2.Request(path)
+        else:
+            request = urllib2.Request(self.__baseuri + path)
+            base64string = base64.encodestring(('%s:%s' % (self.__application.token, self.__application.private_key)).encode()).decode().replace('\n', '')
+            request.add_header("Authorization", "Basic %s" % base64string)
 
         if (method == "GET"):
             try: 
@@ -105,6 +108,17 @@ class ZiggeoConnect:
 
     def postJSON(self, path, data = None, file = None):
         return self.requestJSON("POST", path, data, file)
+
+    def postUploadJSON(self, path, scope, data = None, file = None, type_key = None):
+        if (data == None):
+            data={}
+
+        data[type_key] = file.split(".")[-1]
+
+        result = self.requestJSON("POST", path, data, None)
+
+        self.request("POST", result['url_data']['url'], result['url_data']['fields'], file)
+        return result[scope]
 
     def delete(self, path, data = None, file = None):
         return self.request("DELETE", path, data, file)
