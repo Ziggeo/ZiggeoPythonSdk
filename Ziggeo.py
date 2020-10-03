@@ -29,6 +29,7 @@ class Ziggeo:
             if (self.token.startswith(k)):
                 api_url = v
         self.api_connect = ZiggeoConnect(self, api_url)
+        self.cdn_connect = ZiggeoConnect(self, cdn_url)
         self.__auth = None
         self.__videos = None
         self.__streams = None
