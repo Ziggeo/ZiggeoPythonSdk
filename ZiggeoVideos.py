@@ -19,10 +19,10 @@ class ZiggeoVideos:
         return self.__application.connect.postJSON('/v1/videos/stats_bulk', data)
 
     def download_video(self, token_or_key):
-        return self.__application.connect.get('/v1/videos/' + token_or_key + '/video')
+        return self.__application.cdn_connect.get('/v1/videos/' + token_or_key + '/video')
 
     def download_image(self, token_or_key):
-        return self.__application.connect.get('/v1/videos/' + token_or_key + '/image')
+        return self.__application.cdn_connect.get('/v1/videos/' + token_or_key + '/image')
 
     def get_stats(self, token_or_key):
         return self.__application.connect.getJSON('/v1/videos/' + token_or_key + '/stats')
@@ -46,7 +46,12 @@ class ZiggeoVideos:
         return self.__application.connect.delete('/v1/videos/' + token_or_key + '')
 
     def create(self, data = None, file = None):
-        return self.__application.connect.postJSON('/v1/videos/', data, file)
+        if (file != None):
+            result = self.__application.connect.postUploadJSON('/v1/videos-upload-url', 'video', data, file, 'video_type')
+            result['default_stream'] = self.__application.connect.postJSON('/v1/videos/' + result['token'] + '/streams/' + result['default_stream']['token'] + '/confirm-video')
+            return result
+        else:
+            return self.__application.connect.postJSON('/v1/videos/', data, file)
 
     def analytics(self, token_or_key, data = None):
         return self.__application.connect.postJSON('/v1/videos/' + token_or_key + '/analytics', data)
