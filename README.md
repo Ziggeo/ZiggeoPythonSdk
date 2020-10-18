@@ -1,6 +1,6 @@
 # Ziggeo's Python Server SDK
 
-latest version: **2.20**
+latest version: **2.21**
 
 ## Index
 
@@ -8,8 +8,8 @@ latest version: **2.20**
 2. [Prerequisites](#prerequisites)
     1. [Download](#download)
     2. [How to use](#how-to-use)
-
-    3[Installation](#install)3. [Client-Side Integration](#codes-client-side)
+    3. [Installation](#install)
+3. [Client-Side Integration](#codes-client-side)
 4. [Server-Side Integration](#codes-server-side)
     1. [Init](#codes-init)
     2. [Available Methods](#codes-methods)
@@ -82,7 +82,7 @@ latest version: **2.20**
         3. [Webhooks Delete](#method-webhooks-delete)
     12. [Methods for Analytics](#method-analytics)
         1. [Analytics Get](#method-analytics-get)
-6. [License](#license)
+5. [License](#license)
 
 
 ## Why Ziggeo's Python Server Side SDK? <a name="why-us"></a>

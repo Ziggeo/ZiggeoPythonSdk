@@ -10,7 +10,7 @@ class ZiggeoConfig:
         self.api_regions = {"r1":"https://api-eu-west-1.ziggeo.com"}
 
         self.cdn_url = "https://video-cdn.ziggeo.com"
-        
+
         self.cdn_regions = {"r1":"https://video-cdn-eu-west-1.ziggeo.com"}
 
         self.resilience_factor = 5
