@@ -21,3 +21,6 @@ class ZiggeoMetaProfileProcess:
     def create_nsfw_process(self, meta_token_or_key, data = None):
         return self.__application.connect.postJSON('/v1/metaprofiles/' + meta_token_or_key + '/process/nsfw', data)
 
+    def create_profanity_process(self, meta_token_or_key, data = None):
+        return self.__application.connect.postJSON('/v1/metaprofiles/' + meta_token_or_key + '/process/profanity', data)
+
