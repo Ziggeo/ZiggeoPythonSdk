@@ -57,7 +57,7 @@ class ZiggeoConnect:
             request = urllib2.Request(path)
         else:
             request = urllib2.Request(self.__baseuri + path)
-            base64string = base64.encodestring(('%s:%s' % (self.__application.token, self.__application.private_key)).encode()).decode().replace('\n', '')
+            base64string = base64.encodebytes(('%s:%s' % (self.__application.token, self.__application.private_key)).encode()).decode().replace('\n', '')
             request.add_header("Authorization", "Basic %s" % base64string)
 
         if (method == "GET"):
