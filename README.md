@@ -1,6 +1,6 @@
 # Ziggeo's Python Server SDK
 
-latest version: **2.24**
+latest version: **2.27**
 
 ## Index
 
@@ -900,6 +900,6 @@ ziggeo.analytics().get(arguments = None)
 
 ## License <a name="license"></a>
 
-Copyright (c) 2013-2021 Ziggeo
+Copyright (c) 2013-2022 Ziggeo
  
 Apache 2.0 License
