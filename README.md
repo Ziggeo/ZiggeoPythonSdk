@@ -1,6 +1,6 @@
 # Ziggeo's Python Server SDK
 
-latest version: **2.28**
+latest version: **2.29**
 
 ## Index
 

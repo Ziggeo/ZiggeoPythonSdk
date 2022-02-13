@@ -17,8 +17,8 @@ class ZiggeoAudio_streams:
 
     def create(self, audio_token_or_key, data = None, file = None):
         if (file != None):
-            result = self.__application.connect.postUploadJSON('/server/v1/audios/' + video_token_or_key + '/streams-upload-url', 'stream', data, file, 'video_type')
-            result = self.__application.connect.postJSON('/server/v1/audios/' + video_token_or_key + '/streams/' + result['token'] + '/confirm-video')
+            result = self.__application.connect.postUploadJSON('/server/v1/audios/' + audio_token_or_key + '/streams-upload-url', 'stream', data, file, 'audio_type')
+            result = self.__application.connect.postJSON('/server/v1/audios/' + audio_token_or_key + '/streams/' + result['token'] + '/confirm-video')
             return result
         else:
             return self.__application.api_connect.postJSON('/server/v1/audios/bytoken/' + audio_token_or_key + '/streams', data, file)
