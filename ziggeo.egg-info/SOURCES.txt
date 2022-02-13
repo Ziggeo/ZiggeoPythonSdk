@@ -4,6 +4,8 @@ README.md
 Ziggeo.py
 ZiggeoAnalytics.py
 ZiggeoApplication.py
+ZiggeoAudioStreams.py
+ZiggeoAudios.py
 ZiggeoAuth.py
 ZiggeoAuthtokens.py
 ZiggeoConfig.py

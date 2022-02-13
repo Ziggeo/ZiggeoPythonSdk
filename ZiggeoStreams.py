@@ -48,6 +48,3 @@ class ZiggeoStreams:
     def attach_subtitle(self, video_token_or_key, token_or_key, data = None):
         return self.__application.connect.postJSON('/v1/videos/' + video_token_or_key + '/streams/' + token_or_key + '/subtitle', data)
 
-    def bind(self, video_token_or_key, token_or_key):
-        return self.__application.connect.postJSON('/v1/videos/' + video_token_or_key + '/streams/' + token_or_key + '/bind')
-

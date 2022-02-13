@@ -3,6 +3,8 @@ from ZiggeoConnect import ZiggeoConnect
 from ZiggeoAuth import ZiggeoAuth
 from ZiggeoVideos import ZiggeoVideos
 from ZiggeoStreams import ZiggeoStreams
+from ZiggeoAudios import ZiggeoAudios
+from ZiggeoAudio_streams import ZiggeoAudio_streams
 from ZiggeoAuthtokens import ZiggeoAuthtokens
 from ZiggeoApplication import ZiggeoApplication
 from ZiggeoEffectProfiles import ZiggeoEffectProfiles
@@ -37,6 +39,8 @@ class Ziggeo:
         self.__auth = None
         self.__videos = None
         self.__streams = None
+        self.__audios = None
+        self.__audio_streams = None
         self.__authtokens = None
         self.__application = None
         self.__effectProfiles = None
@@ -58,6 +62,14 @@ class Ziggeo:
         if (self.__streams == None):
             self.__streams = ZiggeoStreams(self)
         return self.__streams
+    def audios(self):
+        if (self.__audios == None):
+            self.__audios = ZiggeoAudios(self)
+        return self.__audios
+    def audio_streams(self):
+        if (self.__audio_streams == None):
+            self.__audio_streams = ZiggeoAudio_streams(self)
+        return self.__audio_streams
     def authtokens(self):
         if (self.__authtokens == None):
             self.__authtokens = ZiggeoAuthtokens(self)

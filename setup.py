@@ -6,7 +6,7 @@ requirements = ['pycryptodome>=3.7.0']
 
 setup(
     name="ziggeo",
-    version="2.27",
+    version="2.28",
     description="Ziggeo SDK for python",
     long_description="Ziggeo API (https://ziggeo.com) allows you to integrate video recording and playback with only two lines of code in your site, service or app. This is the Python Server SDK repository.",
     url="http://github.com/Ziggeo/ZiggeoPythonSdk",
