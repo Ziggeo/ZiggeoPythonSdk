@@ -4,7 +4,7 @@ from ZiggeoAuth import ZiggeoAuth
 from ZiggeoVideos import ZiggeoVideos
 from ZiggeoStreams import ZiggeoStreams
 from ZiggeoAudios import ZiggeoAudios
-from ZiggeoAudio_streams import ZiggeoAudio_streams
+from ZiggeoAudioStreams import ZiggeoAudioStreams
 from ZiggeoAuthtokens import ZiggeoAuthtokens
 from ZiggeoApplication import ZiggeoApplication
 from ZiggeoEffectProfiles import ZiggeoEffectProfiles
@@ -36,11 +36,16 @@ class Ziggeo:
             if (self.token.startswith(k)):
                 cdn_url = v
         self.cdn_connect = ZiggeoConnect(self, cdn_url)
+        js_cdn_url = self.config.js_cdn_url
+        for k, v in self.config.js_cdn_regions.items():
+            if (self.token.startswith(k)):
+                js_cdn_url = v
+        self.js_cdn_connect = ZiggeoConnect(self, js_cdn_url)
         self.__auth = None
         self.__videos = None
         self.__streams = None
         self.__audios = None
-        self.__audio_streams = None
+        self.__audioStreams = None
         self.__authtokens = None
         self.__application = None
         self.__effectProfiles = None
@@ -66,10 +71,10 @@ class Ziggeo:
         if (self.__audios == None):
             self.__audios = ZiggeoAudios(self)
         return self.__audios
-    def audio_streams(self):
-        if (self.__audio_streams == None):
-            self.__audio_streams = ZiggeoAudio_streams(self)
-        return self.__audio_streams
+    def audioStreams(self):
+        if (self.__audioStreams == None):
+            self.__audioStreams = ZiggeoAudioStreams(self)
+        return self.__audioStreams
     def authtokens(self):
         if (self.__authtokens == None):
             self.__authtokens = ZiggeoAuthtokens(self)
