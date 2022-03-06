@@ -8,18 +8,21 @@ from Ziggeo import Ziggeo
 
 if(len(sys.argv) < 3):
 	print("Error\n")
-	print("Usage: $>python metaprofiles_create.py YOUR_APP_TOKEN YOUR_PRIVATE_KEY METAPROFILE_TITLE\n")
+	print("Usage: $>python _videos_index_list_all.py YOUR_APP_TOKEN YOUR_PRIVATE_KEY\n")
 	sys.exit()
 
 app_token = sys.argv[1]
 private_key = sys.argv[2]
-metaprofiles_title = sys.argv[3]
 
 ziggeo = Ziggeo(app_token, private_key)
 
-arguments = {}
-arguments['title'] = metaprofiles_title
+def indexVideos(skip = 0):
+	yey = 0
+	video_list = ziggeo.videos().index({"limit":100, "skip":skip})
+	for video in video_list:
+		print(video)
+	if(len(video_list) > 0):
+		indexVideos(skip + 100)
+	pass
 
-metaprofiles = ziggeo.metaProfiles().create(arguments)
-
-print(metaprofiles)
+indexVideos(0)

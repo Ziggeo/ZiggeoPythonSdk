@@ -8,18 +8,14 @@ from Ziggeo import Ziggeo
 
 if(len(sys.argv) < 3):
 	print("Error\n")
-	print("Usage: $>python metaprofiles_create.py YOUR_APP_TOKEN YOUR_PRIVATE_KEY METAPROFILE_TITLE\n")
+	print("Usage: $>python application_get_stats.py YOUR_APP_TOKEN YOUR_PRIVATE_KEY\n")
 	sys.exit()
 
 app_token = sys.argv[1]
 private_key = sys.argv[2]
-metaprofiles_title = sys.argv[3]
 
 ziggeo = Ziggeo(app_token, private_key)
 
-arguments = {}
-arguments['title'] = metaprofiles_title
+stats = ziggeo.application().get_stats()
 
-metaprofiles = ziggeo.metaProfiles().create(arguments)
-
-print(metaprofiles)
+print(stats)

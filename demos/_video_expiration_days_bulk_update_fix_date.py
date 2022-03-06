@@ -1,6 +1,11 @@
 #This demo gives you the capability to update expiration days for ALL your videos that currently have no expiration days as well as for the ones that have one. 
 #Null for mode 1 and as difference of target date and creation date for mode 2.
-import sys, datetime
+import os, sys
+import datetime
+
+dir_path = os.path.dirname(os.path.realpath(__file__))
+parent_dir_path = os.path.abspath(os.path.join(dir_path, os.pardir))
+sys.path.insert(0, parent_dir_path)
 
 sys.path.append("..")
 
@@ -8,13 +13,13 @@ from Ziggeo import Ziggeo
 
 if(len(sys.argv) < 3):
 	print("Error\n") 
-	print("Usage: $>python _video_expiration_days_bulk_update_fix_date.py YOUR_API_TOKEN YOUR_PRIVATE_KEY")  
+	print("Usage: $>python _video_expiration_days_bulk_update_fix_date.py YOUR_APP_TOKEN YOUR_PRIVATE_KEY")  
 	sys.exit()
 
-api_token = sys.argv[1]
+app_token = sys.argv[1]
 private_key = sys.argv[2]
 
-ziggeo = Ziggeo(api_token, private_key)
+ziggeo = Ziggeo(app_token, private_key)
 
 mode = int(input("Please choose what you want to do. Press 1 if you want to clear any existing expiration settings on all videos. Press 2 if you want to set expiration_days to some date: "))
 
@@ -39,7 +44,7 @@ def InputuserDate():
 
 	indexVideos(0)
 
-def indexVideos(skip=0): 
+def indexVideos(skip = 0): 
 # Will index videos and call update expiration days as per the user choice
 
 	video_list = ziggeo.videos().index({"limit":100, "skip":skip})
@@ -56,7 +61,7 @@ def indexVideos(skip=0):
 		UpdateExpirationDays(video["token"],NewExpirationDays)
 
 	if(len(video_list) > 0):
-		indexVideos(skip+100)
+		indexVideos(skip + 100)
 	pass
 
 def UpdateExpirationDays(video_token,NewExpirationDays):
@@ -71,4 +76,3 @@ if mode == 1:
 	indexVideos(0)
 elif mode == 2:
 	InputuserDate()
-

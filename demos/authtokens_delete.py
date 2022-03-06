@@ -6,20 +6,15 @@ sys.path.insert(0, parent_dir_path)
 
 from Ziggeo import Ziggeo
 
-if(len(sys.argv) < 3):
+if(len(sys.argv) < 4):
 	print("Error\n")
-	print("Usage: $>python metaprofiles_create.py YOUR_APP_TOKEN YOUR_PRIVATE_KEY METAPROFILE_TITLE\n")
+	print("Usage: $>python authtokens_delete.py YOUR_APP_TOKEN YOUR_PRIVATE_KEY AUTHTOKEN\n")
 	sys.exit()
 
 app_token = sys.argv[1]
 private_key = sys.argv[2]
-metaprofiles_title = sys.argv[3]
+auth_token = sys.argv[3]
 
 ziggeo = Ziggeo(app_token, private_key)
 
-arguments = {}
-arguments['title'] = metaprofiles_title
-
-metaprofiles = ziggeo.metaProfiles().create(arguments)
-
-print(metaprofiles)
+print(ziggeo.authtokens().delete(auth_token))
