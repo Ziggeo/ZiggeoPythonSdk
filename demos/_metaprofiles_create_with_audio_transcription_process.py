@@ -8,7 +8,7 @@ from Ziggeo import Ziggeo
 
 if(len(sys.argv) < 3):
 	print("Error\n")
-	print("Usage: $>python metaprofiles_create.py YOUR_APP_TOKEN YOUR_PRIVATE_KEY METAPROFILE_TITLE\n")
+	print("Usage: $>python _metaprofiles_create_with_audio_transcription_process.py YOUR_APP_TOKEN YOUR_PRIVATE_KEY METAPROFILE_TITLE\n")
 	sys.exit()
 
 app_token = sys.argv[1]
@@ -22,4 +22,6 @@ arguments['title'] = metaprofiles_title
 
 metaprofiles = ziggeo.metaProfiles().create(arguments)
 
-print(metaprofiles)
+metaprofiles_process = ziggeo.metaProfileProcess().create_audio_transcription_process(metaprofiles['token'])
+
+print(metaprofiles_process)

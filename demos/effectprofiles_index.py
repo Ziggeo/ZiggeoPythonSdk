@@ -8,18 +8,15 @@ from Ziggeo import Ziggeo
 
 if(len(sys.argv) < 3):
 	print("Error\n")
-	print("Usage: $>python metaprofiles_create.py YOUR_APP_TOKEN YOUR_PRIVATE_KEY METAPROFILE_TITLE\n")
+	print("Usage: $>python effectprofiles_index.py YOUR_APP_TOKEN YOUR_PRIVATE_KEY\n")
 	sys.exit()
 
 app_token = sys.argv[1]
 private_key = sys.argv[2]
-metaprofiles_title = sys.argv[3]
+
+index_arguments = {}
+index_arguments["limit"] = 50
 
 ziggeo = Ziggeo(app_token, private_key)
 
-arguments = {}
-arguments['title'] = metaprofiles_title
-
-metaprofiles = ziggeo.metaProfiles().create(arguments)
-
-print(metaprofiles)
+print(ziggeo.effectProfiles().index(index_arguments))

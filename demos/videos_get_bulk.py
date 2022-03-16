@@ -6,20 +6,18 @@ sys.path.insert(0, parent_dir_path)
 
 from Ziggeo import Ziggeo
 
-if(len(sys.argv) < 3):
+if(len(sys.argv) < 4):
 	print("Error\n")
-	print("Usage: $>python metaprofiles_create.py YOUR_APP_TOKEN YOUR_PRIVATE_KEY METAPROFILE_TITLE\n")
+	print("Usage: $>python videos_get_bulk.py YOUR_APP_TOKEN YOUR_PRIVATE_KEY VIDEO_TOKEN1,VIDEO_TOKEN2 \n")
 	sys.exit()
 
 app_token = sys.argv[1]
 private_key = sys.argv[2]
-metaprofiles_title = sys.argv[3]
+video_token = sys.argv[3]
 
 ziggeo = Ziggeo(app_token, private_key)
 
-arguments = {}
-arguments['title'] = metaprofiles_title
+bulk_arguments = {}
+bulk_arguments["tokens_or_keys"] = video_token
 
-metaprofiles = ziggeo.metaProfiles().create(arguments)
-
-print(metaprofiles)
+print(ziggeo.videos().get_bulk(bulk_arguments))

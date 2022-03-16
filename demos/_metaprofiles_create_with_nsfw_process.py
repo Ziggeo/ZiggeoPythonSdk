@@ -8,7 +8,7 @@ from Ziggeo import Ziggeo
 
 if(len(sys.argv) < 3):
 	print("Error\n")
-	print("Usage: $>python metaprofiles_create.py YOUR_APP_TOKEN YOUR_PRIVATE_KEY METAPROFILE_TITLE\n")
+	print("Usage: $>python _metaprofiles_create_with_nsfw_process.py YOUR_APP_TOKEN YOUR_PRIVATE_KEY METAPROFILE_TITLE\n")
 	sys.exit()
 
 app_token = sys.argv[1]
@@ -22,4 +22,9 @@ arguments['title'] = metaprofiles_title
 
 metaprofiles = ziggeo.metaProfiles().create(arguments)
 
-print(metaprofiles)
+nsfw_arguments = {}
+nsfw_arguments['nsfw_action'] = 'reject'
+
+metaprofiles_process = ziggeo.metaProfileProcess().create_nsfw_process(metaprofiles['token'], nsfw_arguments)
+
+print(metaprofiles_process)

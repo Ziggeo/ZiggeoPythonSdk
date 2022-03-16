@@ -1,5 +1,4 @@
 import os, sys
-import time
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 parent_dir_path = os.path.abspath(os.path.join(dir_path, os.pardir))
@@ -9,21 +8,19 @@ from Ziggeo import Ziggeo
 
 if(len(sys.argv) < 4):
 	print("Error\n")
-	print("Usage: $>python analytics_get.py YOUR_APP_TOKEN YOUR_PRIVATE_KEY QUERY\n")
-	print("Example: $>python analytics_get.py 1234567890abcdef 1234567890abcdef device_view_by_os\n")
+	print("Usage: $>python _videos_update_bulk_expiration_days.py YOUR_APP_TOKEN YOUR_PRIVATE_KEY VIDTOKEN1,VIDTOKEN2 EXPIRATION\n")
+	# Expiration days are integer
 	sys.exit()
 
 app_token = sys.argv[1]
 private_key = sys.argv[2]
-query = sys.argv[3]
+video_token = sys.argv[3]
+expiration_days = sys.argv[4]
 
 ziggeo = Ziggeo(app_token, private_key)
 
-ts = time.time()
-
 arguments = {}
-arguments['from'] = 0
-arguments['to'] = ts
-arguments['query'] = query
+arguments['tokens_or_keys'] = video_token
+arguments["expiration_days"] = expiration_days
 
-print(ziggeo.analytics().get(arguments))
+print ziggeo.videos().update_bulk(arguments)
