@@ -75,7 +75,7 @@ run_demo()
 	run_demo ./demos/videos_get.py $app_token $private_key $video_token
 	run_demo ./demos/videos_get_bulk.py $app_token $private_key $video_token
 	run_demo ./demos/videos_index.py $app_token $private_key
-	run_demo ./demos/videos_push_to_service.py $app_token $private_key $video_tokens $push_token
+	run_demo ./demos/videos_push_to_service.py $app_token $private_key $video_token $push_token
 	run_demo ./demos/videos_get_stats.py $app_token $private_key $video_token
 	run_demo ./demos/videos_stats_bulk.py $app_token $private_key $video_token
 
